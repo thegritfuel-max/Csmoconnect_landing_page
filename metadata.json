@@ -1,0 +1,8 @@
+{
+  "name": "Horizon: Beyond the Stars",
+  "description": "A premium astronomical data platform with AI-powered video and music generation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
