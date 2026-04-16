@@ -65,6 +65,8 @@ export default function App() {
 
   return (
     <main className="relative bg-black min-h-screen overflow-x-hidden">
+      <div className="grit-overlay" />
+      <div className="scanline" />
       <Navbar />
       
       <div className="relative z-10">

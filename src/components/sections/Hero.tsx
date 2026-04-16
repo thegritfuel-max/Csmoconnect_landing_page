@@ -18,6 +18,7 @@ export const Hero = () => {
         metricLabel="Active Nodes"
         ctaHeading="Join the Network."
         ctaDescription="Connect your telescope to India's first distributed observation network and contribute to real scientific discoveries."
+        founders={["Devansh Kadam", "Somesh Otari"]}
       />
     </section>
   );

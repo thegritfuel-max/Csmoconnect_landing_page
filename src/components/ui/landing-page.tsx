@@ -91,39 +91,41 @@ export const ScrollGlobe = ({ sections, className }: ScrollGlobeProps) => {
             >
               {section.badge && (
                 <div className={cn(
-                  "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20",
+                  "inline-flex items-center gap-2 px-4 py-1.5 rounded-full liquid-glass",
                   section.align === "center" && "mx-auto"
                 )}>
-                  <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">
+                  <span className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.3em] font-space">
                     {section.badge}
                   </span>
                 </div>
               )}
 
-              <div className="space-y-4">
-                <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-tight">
+              <div className="space-y-6">
+                <h2 className="text-6xl md:text-8xl font-bold text-white tracking-tighter leading-[0.9] font-display">
                   {section.title}
                   {section.subtitle && (
-                    <span className="block text-blue-500">{section.subtitle}</span>
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">{section.subtitle}</span>
                   )}
                 </h2>
-                <p className="text-xl text-white/60 font-light leading-relaxed">
+                <p className="text-xl text-white/40 font-light leading-relaxed font-sans max-w-xl">
                   {section.description}
                 </p>
               </div>
 
               {section.features && (
                 <div className={cn(
-                  "grid grid-cols-1 md:grid-cols-2 gap-6 pt-8",
+                  "grid grid-cols-1 md:grid-cols-2 gap-8 pt-12",
                   section.align === "center" && "text-left"
                 )}>
                   {section.features.map((feature, i) => (
-                    <div key={i} className="space-y-2">
-                      <div className="flex items-center gap-2 text-blue-400">
-                        <CheckCircle2 size={18} />
-                        <span className="font-bold text-white">{feature.title}</span>
+                    <div key={i} className="space-y-3 p-6 rounded-3xl liquid-glass group hover:bg-white/5 transition-colors">
+                      <div className="flex items-center gap-3 text-blue-400">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                          <CheckCircle2 size={16} />
+                        </div>
+                        <span className="font-bold text-white font-display">{feature.title}</span>
                       </div>
-                      <p className="text-sm text-white/40 leading-relaxed">
+                      <p className="text-sm text-white/40 leading-relaxed font-sans">
                         {feature.description}
                       </p>
                     </div>
@@ -133,7 +135,7 @@ export const ScrollGlobe = ({ sections, className }: ScrollGlobeProps) => {
 
               {section.actions && (
                 <div className={cn(
-                  "flex flex-wrap gap-4 pt-8",
+                  "flex flex-wrap gap-6 pt-12",
                   section.align === "center" && "justify-center"
                 )}>
                   {section.actions.map((action, i) => (
@@ -141,10 +143,10 @@ export const ScrollGlobe = ({ sections, className }: ScrollGlobeProps) => {
                       key={i}
                       onClick={action.onClick}
                       className={cn(
-                        "px-8 py-4 rounded-full font-bold transition-all flex items-center gap-2",
+                        "px-10 py-5 rounded-full font-bold transition-all flex items-center gap-3 font-space uppercase tracking-widest text-sm hover:scale-105 active:scale-95",
                         action.variant === "primary"
-                          ? "bg-blue-600 text-white hover:bg-blue-700"
-                          : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                          ? "bg-white text-black hover:bg-white/90"
+                          : "liquid-glass text-white hover:bg-white/5"
                       )}
                     >
                       {action.label}
