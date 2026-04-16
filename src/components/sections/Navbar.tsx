@@ -67,15 +67,7 @@ export const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        {user ? (
-          <div className="flex items-center gap-4">
-            <span className="text-white/60 text-sm hidden sm:inline">{user.displayName}</span>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>Logout</Button>
-          </div>
-        ) : (
-          <Button variant="ghost" size="sm" onClick={handleLogin}>Sign In</Button>
-        )}
-        <Button variant="ghost" size="sm" className="hidden sm:inline-flex" onClick={() => window.location.href = '#download'}>Download App</Button>
+        {/* Removed Sign In and Download App buttons */}
       </div>
     </motion.nav>
   );

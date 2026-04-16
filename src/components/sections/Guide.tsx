@@ -1,43 +1,64 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Bluetooth, Search, Cloud, Globe, Zap, Cpu, MousePointer2 } from 'lucide-react';
+import {
+  SliderBtnGroup,
+  ProgressSlider,
+  SliderBtn,
+  SliderContent,
+  SliderWrapper,
+} from '../ui/progressive-carousel';
 
 export const Guide = () => {
   const steps = [
     {
-      title: "Step 1",
+      id: 'attach',
+      title: "Step 1: Attach",
       description: "Attach the CosmoConnect Node to your telescope eyepiece.",
-      icon: Cpu
+      icon: Cpu,
+      img: "/input_file_0.png"
     },
     {
-      title: "Step 2",
+      id: 'connect',
+      title: "Step 2: Connect",
       description: "Connect the device to the mobile app via Bluetooth.",
-      icon: Bluetooth
+      icon: Bluetooth,
+      img: "/input_file_1.png"
     },
     {
-      title: "Step 3",
+      id: 'select',
+      title: "Step 3: Select",
       description: "Select observation mode or scheduled capture.",
-      icon: MousePointer2
+      icon: MousePointer2,
+      img: "/input_file_2.png"
     },
     {
-      title: "Step 4",
+      id: 'capture',
+      title: "Step 4: Capture",
       description: "Device captures sky images automatically.",
-      icon: Zap
+      icon: Zap,
+      img: "/input_file_3.png"
     },
     {
-      title: "Step 5",
+      id: 'analyze',
+      title: "Step 5: Analyze",
       description: "AI analyzes celestial objects.",
-      icon: Search
+      icon: Search,
+      img: "/input_file_4.png"
     },
     {
-      title: "Step 6",
+      id: 'upload',
+      title: "Step 6: Sync",
       description: "Data uploads to cloud network.",
-      icon: Cloud
+      icon: Cloud,
+      img: "/input_file_5.png"
     },
     {
-      title: "Step 7",
+      id: 'network',
+      title: "Step 7: Join",
       description: "You become part of India's distributed observatory.",
-      icon: Globe
+      icon: Globe,
+      img: "/input_file_6.png"
     }
   ];
 
@@ -53,28 +74,53 @@ export const Guide = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-[32px] bg-white/5 border border-white/10 relative group hover:border-blue-500/30 transition-colors"
-            >
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
-                {index + 1}
-              </div>
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <step.icon className="text-blue-400" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">{step.title}</h3>
-              <p className="text-white/40 text-sm font-light leading-relaxed">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
+        <div className="relative">
+          <ProgressSlider vertical={false} activeSlider='attach' className="w-full">
+            <SliderContent className="relative w-full aspect-[21/9] md:aspect-[21/7] overflow-hidden rounded-[40px] border border-white/10">
+              {steps.map((step) => (
+                <SliderWrapper key={step.id} value={step.id}>
+                  <div className="relative w-full h-full">
+                    <img
+                      className='w-full h-full object-cover opacity-60'
+                      src={step.img}
+                      alt={step.description}
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    <div className="absolute bottom-12 left-12 right-12">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+                          <step.icon size={24} />
+                        </div>
+                        <h3 className="text-3xl font-bold text-white">{step.title}</h3>
+                      </div>
+                      <p className="text-xl text-white/80 font-light max-w-2xl">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                </SliderWrapper>
+              ))}
+            </SliderContent>
+
+            <SliderBtnGroup className='mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4'>
+              {steps.map((step) => (
+                <SliderBtn
+                  key={step.id}
+                  value={step.id}
+                  className='text-left cursor-pointer p-4 rounded-2xl bg-white/5 border border-white/10 transition-all hover:bg-white/10'
+                  progressBarClass='bg-blue-500/20 h-full rounded-2xl'
+                >
+                  <div className="relative z-10">
+                    <h4 className='text-xs font-bold text-blue-400 uppercase tracking-widest mb-1'>
+                      {step.id}
+                    </h4>
+                    <p className='text-sm text-white/60 font-medium line-clamp-1'>{step.title}</p>
+                  </div>
+                </SliderBtn>
+              ))}
+            </SliderBtnGroup>
+          </ProgressSlider>
         </div>
       </div>
     </section>

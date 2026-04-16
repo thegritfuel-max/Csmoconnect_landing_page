@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { GoogleGenAI, Modality } from "@google/genai";
-import { auth, db, handleFirestoreError, OperationType } from '../../firebase';
-import { collection, addDoc, serverTimestamp, query, where, onSnapshot, orderBy } from 'firebase/firestore';
+import { GoogleGenAI } from "@google/genai";
 import { Button } from '../ui/button';
-import { Video, Music, Upload, Loader2, Play, Download, Music2, Film } from 'lucide-react';
+import { Video, Music, Upload, Loader2, Music2, Film } from 'lucide-react';
 
 export const Dashboard = () => {
-  const [user, setUser] = useState(auth.currentUser);
   const [videoPrompt, setVideoPrompt] = useState('');
   const [musicPrompt, setMusicPrompt] = useState('');
   const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
@@ -16,30 +13,6 @@ export const Dashboard = () => {
   const [generations, setGenerations] = useState<any[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const q = query(
-      collection(db, 'generations'),
-      where('userId', '==', user.uid),
-      orderBy('createdAt', 'desc')
-    );
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setGenerations(docs);
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, 'generations');
-    });
-
-    return () => unsubscribe();
-  }, [user]);
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setVideoFile(e.target.files[0]);
@@ -47,7 +20,7 @@ export const Dashboard = () => {
   };
 
   const generateVideo = async () => {
-    if (!user || !videoPrompt) return;
+    if (!videoPrompt) return;
     setIsGeneratingVideo(true);
 
     try {
@@ -89,14 +62,15 @@ export const Dashboard = () => {
       const blob = await videoResponse.blob();
       const videoUrl = URL.createObjectURL(blob);
 
-      await addDoc(collection(db, 'generations'), {
-        userId: user.uid,
+      const newGen = {
+        id: Date.now().toString(),
         type: 'video',
         prompt: videoPrompt,
         url: videoUrl,
-        createdAt: serverTimestamp(),
-      });
+        createdAt: new Date(),
+      };
 
+      setGenerations(prev => [newGen, ...prev]);
       setVideoPrompt('');
       setVideoFile(null);
     } catch (error) {
@@ -107,7 +81,7 @@ export const Dashboard = () => {
   };
 
   const generateMusic = async () => {
-    if (!user || !musicPrompt) return;
+    if (!musicPrompt) return;
     setIsGeneratingMusic(true);
 
     try {
@@ -141,14 +115,15 @@ export const Dashboard = () => {
       const blob = new Blob([bytes], { type: mimeType });
       const audioUrl = URL.createObjectURL(blob);
 
-      await addDoc(collection(db, 'generations'), {
-        userId: user.uid,
+      const newGen = {
+        id: Date.now().toString(),
         type: 'music',
         prompt: musicPrompt,
         url: audioUrl,
-        createdAt: serverTimestamp(),
-      });
+        createdAt: new Date(),
+      };
 
+      setGenerations(prev => [newGen, ...prev]);
       setMusicPrompt('');
     } catch (error) {
       console.error('Music generation failed:', error);
@@ -156,8 +131,6 @@ export const Dashboard = () => {
       setIsGeneratingMusic(false);
     }
   };
-
-  if (!user) return null;
 
   return (
     <section id="dashboard" className="py-24 px-6 bg-black relative z-10">

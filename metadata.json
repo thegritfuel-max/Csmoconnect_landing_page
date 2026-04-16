@@ -1,8 +1,9 @@
 {
-  "name": "Horizon: Beyond the Stars",
-  "description": "A premium astronomical data platform with AI-powered video and music generation.",
+  "name": "CosmoConnect",
+  "description": "India's First AI Powered Distributed Telescope Network. Connecting amateur astronomers to build a national cloud-connected space observation network.",
   "requestFramePermissions": [
     "camera",
-    "microphone"
+    "microphone",
+    "geolocation"
   ]
 }

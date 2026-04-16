@@ -8,6 +8,7 @@ import { Features } from './components/sections/Features';
 import { AppFeatures } from './components/sections/AppFeatures';
 import { AppDownload } from './components/sections/AppDownload';
 import { Guide } from './components/sections/Guide';
+import { Onboarding } from './components/sections/Onboarding';
 import { Research } from './components/sections/Research';
 import { Vision } from './components/sections/Vision';
 import { Courses } from './components/sections/Courses';
@@ -64,17 +65,17 @@ export default function App() {
 
   return (
     <main className="relative bg-black min-h-screen overflow-x-hidden">
-      <Starfield />
       <Navbar />
       
       <div className="relative z-10">
         <Hero />
+        <Guide />
+        <Onboarding />
         <Technology />
         <Product />
         <Features />
         <AppFeatures />
         <AppDownload />
-        <Guide />
         <Research />
         {user && <Dashboard />}
         <Courses />
