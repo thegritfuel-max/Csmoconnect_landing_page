@@ -25,9 +25,6 @@
   
   body {
     @apply bg-black text-white font-sans selection:bg-blue-500/30 overflow-x-hidden;
-    background-image: 
-      radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 50%);
   }
 }
 
@@ -52,37 +49,10 @@
     text-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
   }
 
-  .grit-overlay {
-    @apply fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] mix-blend-overlay;
-    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-  }
-
-  .scanline {
-    @apply fixed inset-0 z-[9998] pointer-events-none opacity-[0.02];
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.25) 50%
-    ), linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.06),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
-    );
-    background-size: 100% 2px, 3px 100%;
-  }
-
   .tech-border {
-    @apply border-white/10 border-dashed;
+    @apply border-white/10;
   }
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
-  }
 }
 
 /* Redundant animations cleaned up, keeping core cosmic ones */

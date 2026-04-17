@@ -42,24 +42,12 @@ export const Product = () => {
     <section id="product" className="py-24 bg-black relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter uppercase"
-          >
-            COSMOCONNECT <span className="text-purple-400">SMART TELESCOPE NODE</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/60 text-lg max-w-3xl mx-auto font-light leading-relaxed"
-          >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter uppercase">
+            COSMOCONNECT <span className="text-blue-500">SMART TELESCOPE NODE</span>
+          </h2>
+          <p className="text-white/60 text-lg max-w-3xl mx-auto font-light leading-relaxed">
             Our hardware node is designed to be compatible with almost any amateur telescope, bringing professional-grade AI capabilities to your backyard.
-          </motion.p>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-white/10 rounded-3xl overflow-hidden bg-white/[0.02]">

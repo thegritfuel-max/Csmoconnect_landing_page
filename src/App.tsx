@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
 import { Starfield } from './components/ui/starfield-1';
 import { Navbar } from './components/sections/Navbar';
 import { Hero } from './components/sections/Hero';
@@ -12,48 +14,23 @@ import { Onboarding } from './components/sections/Onboarding';
 import { Research } from './components/sections/Research';
 import { Vision } from './components/sections/Vision';
 import { Courses } from './components/sections/Courses';
+import { SquishyPricing } from './components/ui/squishy-pricing';
 import { Contact } from './components/sections/Contact';
-import { Dashboard } from './components/sections/Dashboard';
-import { auth } from './firebase';
-import { User } from 'firebase/auth';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { WorldMap } from './components/ui/map';
+import { CinematicFooter } from './components/ui/motion-footer';
+import { ThemeProvider } from 'next-themes';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((u) => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setIsAuthReady(true);
     });
     return () => unsubscribe();
   }, []);
-
-  useEffect(() => {
-    if (isAuthReady) {
-      // GSAP Reveal animations for sections
-      gsap.utils.toArray('section').forEach((section: any) => {
-        gsap.fromTo(section, 
-          { opacity: 0, y: 50 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1, 
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            }
-          }
-        );
-      });
-    }
-  }, [isAuthReady]);
 
   if (!isAuthReady) {
     return (
@@ -64,40 +41,64 @@ export default function App() {
   }
 
   return (
-    <main className="relative bg-black min-h-screen overflow-x-hidden">
-      <div className="grit-overlay" />
-      <div className="scanline" />
-      <Navbar />
-      
-      <div className="relative z-10">
-        <Hero />
-        <Guide />
-        <Onboarding />
-        <Technology />
-        <Product />
-        <Features />
-        <AppFeatures />
-        <AppDownload />
-        <Research />
-        {user && <Dashboard />}
-        <Courses />
-        <Vision />
-        <Contact />
-      </div>
+    <ThemeProvider attribute="class" defaultTheme="dark">
+      <main className="relative bg-black min-h-screen overflow-x-hidden selection:bg-blue-500/30">
+        <Navbar />
+        
+        <div className="relative z-10 bg-black rounded-b-[48px] shadow-2xl border-b border-white/5">
+          <Hero />
+          <Guide />
+          <Onboarding />
+          <Technology />
+          <Product />
+          
+          <section className="py-24 bg-black relative overflow-hidden">
+            <div className="max-w-7xl mx-auto text-center mb-12">
+               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-4 uppercase">
+                Global <span className="text-blue-500">Observation Network</span>
+              </h2>
+              <p className="text-white/60 text-lg font-light max-w-2xl mx-auto">
+                Connecting amateur astronomers across continents to create a giant distributed eye on the cosmos.
+              </p>
+            </div>
+            <WorldMap
+              dots={[
+                {
+                  start: { lat: 28.6139, lng: 77.209, label: "New Delhi" },
+                  end: { lat: 19.076, lng: 72.8777, label: "Mumbai" },
+                },
+                {
+                  start: { lat: 28.6139, lng: 77.209, label: "New Delhi" },
+                  end: { lat: 12.9716, lng: 77.5946, label: "Bengaluru" },
+                },
+                {
+                  start: { lat: 51.5074, lng: -0.1278, label: "London" },
+                  end: { lat: 28.6139, lng: 77.209, label: "New Delhi" },
+                },
+                {
+                  start: { lat: 34.0522, lng: -118.2437, label: "Los Angeles" },
+                  end: { lat: 28.6139, lng: 77.209, label: "New Delhi" },
+                },
+                {
+                  start: { lat: -33.8688, lng: 151.2093, label: "Sydney" },
+                  end: { lat: 12.9716, lng: 77.5946, label: "Bengaluru" },
+                },
+              ]}
+            />
+          </section>
 
-      <footer className="py-12 px-6 border-t border-white/5 relative z-10 bg-black">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <span className="text-white font-bold tracking-tighter text-2xl uppercase">CosmoConnect</span>
-            <p className="text-white/40 text-sm font-light">© 2026 CosmoConnect. India's First AI Powered Distributed Telescope Network.</p>
-          </div>
-          <div className="flex items-center gap-8">
-            {['Privacy', 'Terms', 'Contact'].map((item) => (
-              <a key={item} href="#" className="text-white/40 hover:text-white text-sm transition-colors">{item}</a>
-            ))}
-          </div>
+          <Features />
+          <AppFeatures />
+          <AppDownload />
+          <SquishyPricing />
+          <Research />
+          <Courses />
+          <Vision />
+          <Contact />
         </div>
-      </footer>
-    </main>
+
+        <CinematicFooter />
+      </main>
+    </ThemeProvider>
   );
 }

@@ -23,7 +23,7 @@ export const Onboarding = () => {
       { id: 5, text: "Clear Sky Visibility" },
     ],
     videoThumbnailUrl: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1200",
-    videoUrl: "https://www.youtube.com/embed/3yBgLxgwS1U?si=_MZFE2nm9fevcj76",
+    videoUrl: "https://www.youtube.com/embed/8pbpg9Yr4rs",
   };
 
   return (

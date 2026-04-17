@@ -101,24 +101,12 @@ export const Technology = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter"
-          >
-            OUR CORE <span className="text-purple-400">TECHNOLOGY</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/60 text-lg max-w-3xl mx-auto font-light leading-relaxed"
-          >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
+            OUR CORE <span className="text-blue-500">TECHNOLOGY</span>
+          </h2>
+          <p className="text-white/60 text-lg max-w-3xl mx-auto font-light leading-relaxed">
             CosmoConnect combines Artificial Intelligence, Edge Computing, and Cloud Infrastructure to create a distributed astronomical imaging network called CDTN (Cloud Distributed Telescope Network).
-          </motion.p>
+          </p>
         </div>
 
         <div className="relative h-[600px] w-full mb-20">
@@ -143,20 +131,16 @@ export const Technology = () => {
               icon: Cpu
             }
           ].map((tech, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 + i * 0.1 }}
-              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-500/30 transition-all group"
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all group text-center"
             >
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <tech.icon className="text-purple-400" size={28} />
+              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <tech.icon className="text-blue-500" size={28} />
               </div>
               <h3 className="text-xl font-bold text-white mb-4">{tech.title}</h3>
               <p className="text-white/40 font-light leading-relaxed">{tech.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

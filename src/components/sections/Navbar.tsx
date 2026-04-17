@@ -44,26 +44,21 @@ export const Navbar = () => {
   return (
     <motion.nav
       style={{ backgroundColor, backdropFilter: backdropBlur }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-8 py-3 flex items-center justify-between rounded-full border border-white/10 liquid-glass"
+      className="fixed top-0 left-0 right-0 z-50 px-8 py-4 flex items-center justify-between border-b border-white/5 bg-black/60 backdrop-blur-xl"
     >
       <div className="flex items-center gap-12">
-        <a href="#" className="flex items-center gap-4 group">
-          <div className="w-10 h-10 rounded-lg overflow-hidden liquid-glass flex items-center justify-center group-hover:scale-110 transition-transform tech-border">
-            <img 
-              src="/input_file_1.png" 
-              alt="CosmoConnect Logo" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center group-hover:rotate-12 transition-transform">
+            <Telescope size={20} className="text-white" />
           </div>
-          <span className="text-white font-bold tracking-tighter text-xl uppercase font-display hidden xl:block">CosmoConnect</span>
+          <span className="text-white font-bold tracking-tighter text-2xl uppercase font-display">CosmoConnect</span>
         </a>
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-white/40 hover:text-white text-[9px] font-bold transition-colors uppercase tracking-[0.3em] font-mono"
+              className="text-white/40 hover:text-white text-sm font-medium transition-colors font-sans"
             >
               {link.name}
             </a>
@@ -71,12 +66,11 @@ export const Navbar = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <div className="hidden sm:flex items-center gap-3 px-3 py-1 rounded-sm bg-blue-500/5 border border-blue-500/10">
-          <div className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" />
-          <span className="text-[8px] font-mono text-blue-400 font-bold uppercase tracking-widest">Live_Feed_Active</span>
-        </div>
-        <button className="group relative px-6 py-2 bg-white text-black text-[10px] font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 font-space uppercase tracking-widest">
+      <div className="flex items-center gap-4">
+        <button className="hidden sm:block text-sm font-medium text-white/40 hover:text-white transition-colors">
+          Terminal Entry
+        </button>
+        <button className="group relative px-6 py-2 bg-blue-600 text-white text-sm font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95">
            Join Network
         </button>
       </div>

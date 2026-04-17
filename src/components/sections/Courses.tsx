@@ -37,9 +37,29 @@ export const Courses = () => {
               <GraduationCap size={14} />
               <span>CosmoConnect Academy</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-4">
-              LEARN <span className="text-purple-400">ASTRONOMY</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-4 uppercase">
+              LEARN <span className="text-purple-500">ASTRONOMY</span>
             </h2>
+            <div className="flex flex-wrap gap-4 mt-8">
+              <a 
+                href="https://youtu.be/mA1QywQ30rk" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 text-white font-bold hover:bg-red-700 transition-colors"
+              >
+                <PlayCircle size={20} />
+                <span>Basic Astronomy Guide</span>
+              </a>
+              <a 
+                href="https://youtu.be/8pbpg9Yr4rs" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white font-bold hover:bg-white/20 transition-colors"
+              >
+                <PlayCircle size={20} />
+                <span>About CosmoConnect</span>
+              </a>
+            </div>
             <p className="text-white/60 text-lg font-light">
               Master the skills of space observation through our structured learning modules designed for students and enthusiasts.
             </p>
@@ -51,13 +71,9 @@ export const Courses = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {courses.map((course, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group rounded-[32px] bg-white/5 border border-white/10 overflow-hidden hover:border-purple-500/30 transition-all"
+              className="group rounded-[32px] bg-white/5 border border-white/10 overflow-hidden hover:border-purple-500/30 transition-all text-center"
             >
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -94,7 +110,7 @@ export const Courses = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
